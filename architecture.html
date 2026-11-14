@@ -571,23 +571,24 @@
                 <div class="tbl-wrap"><table>
                     <thead><tr><th>Variable</th><th>Dark</th><th>Light</th></tr></thead>
                     <tbody>
-                        <tr><td><code>--soc-bg</code></td><td>#0d1117</td><td>#eef2f9</td></tr>
+                        <tr><td><code>--soc-bg</code></td><td>#0d1117</td><td>#f4f4f4</td></tr>
                         <tr><td><code>--soc-bg-1</code></td><td>#161b22</td><td>#ffffff</td></tr>
-                        <tr><td><code>--soc-bg-2</code></td><td>#1c2433</td><td>#f5f8fd</td></tr>
-                        <tr><td><code>--soc-line</code></td><td>#253040</td><td>#d8e0ee</td></tr>
-                        <tr><td><code>--soc-line2</code></td><td>#374d6c</td><td>#b8c4dc</td></tr>
-                        <tr><td><code>--soc-ink</code></td><td>#eef3ff</td><td>#0c1729</td></tr>
-                        <tr><td><code>--soc-ink2</code></td><td>#c4ceea</td><td>#2c3d58</td></tr>
-                        <tr><td><code>--soc-ink3</code></td><td>#8a9bbf</td><td>#4e6080</td></tr>
-                        <tr><td><code>--soc-ink4</code></td><td>#5e718a</td><td>#6b7896</td></tr>
-                        <tr><td><code>--soc-cy</code></td><td>#22e1ff</td><td>#0891b2</td></tr>
-                        <tr><td><code>--soc-cy2</code></td><td>#06b8d9</td><td>#0e7490</td></tr>
-                        <tr><td><code>--soc-am</code></td><td>#ffb547</td><td>#b45309</td></tr>
-                        <tr><td><code>--soc-gn</code></td><td>#3ddc84</td><td>#15803d</td></tr>
-                        <tr><td><code>--soc-rd</code></td><td>#ff5577</td><td>#be1d3a</td></tr>
-                        <tr><td><code>--soc-vi</code></td><td>#a78bfa</td><td>#6d28d9</td></tr>
+                        <tr><td><code>--soc-bg-2</code></td><td>#1c2433</td><td>#f4f4f4</td></tr>
+                        <tr><td><code>--soc-line</code></td><td>#253040</td><td>#e0e0e0</td></tr>
+                        <tr><td><code>--soc-line2</code></td><td>#374d6c</td><td>#c6c6c6</td></tr>
+                        <tr><td><code>--soc-ink</code></td><td>#eef3ff</td><td>#161616</td></tr>
+                        <tr><td><code>--soc-ink2</code></td><td>#c4ceea</td><td>#393939</td></tr>
+                        <tr><td><code>--soc-ink3</code></td><td>#8a9bbf</td><td>#525252</td></tr>
+                        <tr><td><code>--soc-ink4</code></td><td>#5e718a</td><td>#6f6f6f</td></tr>
+                        <tr><td><code>--soc-cy</code></td><td>#22e1ff</td><td>#0f62fe</td></tr>
+                        <tr><td><code>--soc-cy2</code></td><td>#06b8d9</td><td>#0043ce</td></tr>
+                        <tr><td><code>--soc-am</code></td><td>#ffb547</td><td>#8e6a00</td></tr>
+                        <tr><td><code>--soc-gn</code></td><td>#3ddc84</td><td>#198038</td></tr>
+                        <tr><td><code>--soc-rd</code></td><td>#ff5577</td><td>#da1e28</td></tr>
+                        <tr><td><code>--soc-vi</code></td><td>#a78bfa</td><td>#8a3ffc</td></tr>
                     </tbody>
                 </table></div>
+                <div class="callout info"><p><strong>Light theme direction (I1 "SIEM console"):</strong> modelled on IBM Carbon g10. Flat neutral page, white panels, one blue accent, square corners, no shadows or glows (2px blue focus outline instead), no gradient washes. The light overrides live in the <code>L1</code> block at the end of <code>themes/soc.css</code> plus an index-only block at the end of the <code>&lt;style&gt;</code> in <code>index.html</code>. Status chips (<code>.sev</code>) use Carbon tag tints (light fill + matching border, D1). Chart/bar colours use the separate <code>--act-*</code> (activity timeline: cert #0f62fe, comp #b28600, talk #9f1853, research #009d9a, IR #da1e28) and <code>--plat-*</code> (CD / HTB / BTLO / CTF) variables, validated for contrast and colour-blind separation; in dark mode they fall back to the brand / <code>--cat-*</code> colours. Data bars are lifted one step lighter with a <code>filter</code> in light mode. Avoid <code>*/</code> inside CSS comments: it closes the comment and silently drops the next rule.</p></div>
                 <div class="callout info"><p><strong>Exception:</strong> <code>.soc-cta</code> intentionally retains its dark gradient in both themes — the dark surface provides contrast for CTA text regardless of page theme.</p></div>
             </div>
 

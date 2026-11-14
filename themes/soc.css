@@ -76,7 +76,7 @@ body { background: var(--soc-bg); color: var(--soc-ink); font-family: system-ui,
 .soc-select::-ms-expand { display:none; }
 .soc-select option { background:var(--soc-bg-1);color:var(--soc-ink); }
 [data-theme="light"] .soc-select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%234e6080' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5'/%3E%3C/svg%3E"); }
-[data-theme="light"] .soc-select:focus-visible { box-shadow:0 0 0 3px rgba(8,145,178,.15); }
+[data-theme="light"] .soc-select:focus-visible { box-shadow:0 0 0 3px rgba(15,98,254,.15); }
 
 /* ── Result count ─────────────────────────────────────────── */
 .soc-result-count { font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--soc-ink3); }
@@ -767,13 +767,13 @@ html[data-theme="light"] {
 
 /* ── Severity badges — pastel soft fills ─────────────────── */
 [data-theme="light"] .sev.green  { background: #dcfce7; border-color: rgba(21,128,61,.25); }
-[data-theme="light"] .sev.cyan   { background: #cffafe; border-color: rgba(8,145,178,.25); }
+[data-theme="light"] .sev.cyan   { background: #edf5ff; border-color: rgba(15,98,254,.25); }
 [data-theme="light"] .sev.amber  { background: #fef3c7; border-color: rgba(180,83,9,.25);  }
 [data-theme="light"] .sev.red    { background: #fee2e6; border-color: rgba(190,29,58,.22); }
 [data-theme="light"] .sev.violet { background: #ede9fe; border-color: rgba(109,40,217,.25); }
 
 /* ── Section heading glow — softer on light ──────────────── */
-[data-theme="light"] h2.soc-section::before    { box-shadow: rgba(8,145,178,.35)  0 0 6px; }
+[data-theme="light"] h2.soc-section::before    { box-shadow: rgba(15,98,254,.35)  0 0 6px; }
 [data-theme="light"] h2.soc-section-lbl::before { box-shadow: rgba(190,29,58,.35) 0 0 6px; }
 
 /* ── Table header ─────────────────────────────────────────── */
@@ -794,19 +794,19 @@ html[data-theme="light"] {
 }
 
 /* ── Callouts ─────────────────────────────────────────────── */
-[data-theme="light"] .res-callout.info    { background: rgba(8,145,178,.06);  border-color: rgba(8,145,178,.20);  }
+[data-theme="light"] .res-callout.info    { background: rgba(15,98,254,.06);  border-color: rgba(15,98,254,.20);  }
 [data-theme="light"] .res-callout.warning { background: rgba(180,83,9,.06);   border-color: rgba(180,83,9,.20);   }
 [data-theme="light"] .res-callout.tip     { background: rgba(21,128,61,.05);  border-color: rgba(21,128,61,.20);  }
 
 /* ── TOC item hover ───────────────────────────────────────── */
 [data-theme="light"] .res-toc-item:hover,
-[data-theme="light"] .ir-toc-item:hover { background: rgba(8,145,178,.06); color: var(--soc-cy); }
+[data-theme="light"] .ir-toc-item:hover { background: rgba(15,98,254,.06); color: var(--soc-cy); }
 
 /* ── Table row hover + code cells ────────────────────────── */
 [data-theme="light"] .res-table tbody tr:hover,
-[data-theme="light"] .ir-table tbody tr:hover  { background: rgba(8,145,178,.03); }
+[data-theme="light"] .ir-table tbody tr:hover  { background: rgba(15,98,254,.03); }
 [data-theme="light"] .res-table tbody td code,
-[data-theme="light"] .ir-table tbody td code   { background: rgba(8,145,178,.06); border-color: rgba(8,145,178,.15); }
+[data-theme="light"] .ir-table tbody td code   { background: rgba(15,98,254,.06); border-color: rgba(15,98,254,.15); }
 
 /* ── IR section icon ──────────────────────────────────────── */
 [data-theme="light"] .ir-section-icon {
@@ -952,7 +952,7 @@ html[data-theme="light"] {
 
 /* ── Primary button — fix hover shade for light cyan ─────── */
 [data-theme="light"] .soc-btn:hover        { background: var(--soc-cy2); }
-[data-theme="light"] .soc-btn.ghost:hover  { background: rgba(8,145,178,.10); }
+[data-theme="light"] .soc-btn.ghost:hover  { background: rgba(15,98,254,.10); }
 
 /* ── Nav bar ──────────────────────────────────────────────── */
 [data-theme="light"] .soc-nav { background: rgba(255,255,255,.70) !important; }
@@ -1095,7 +1095,7 @@ html[data-theme="light"] {
     background:var(--soc-cy);box-shadow:0 0 8px rgba(34,225,255,.6);
   }
 }
-[data-theme="light"] .soc-article :is(.res-toc-item, .ir-toc-item).is-active { background:rgba(8,145,178,.08); }
+[data-theme="light"] .soc-article :is(.res-toc-item, .ir-toc-item).is-active { background:rgba(15,98,254,.08); }
 
 /* ─── Reading progress (P1, injected by themes/soc-nav.js) ───
    ≥1440px: card at the bottom of the info rail (percent, current section, back links).
@@ -1196,3 +1196,82 @@ html[data-theme="light"] {
   background:var(--hc);border-color:var(--hc);color:#001520;box-shadow:0 0 14px color-mix(in srgb, var(--hc) 40%, transparent);
 }
 html[data-theme="light"] :is(.res-card, .ir-card, .rev-card):hover :is(.res-card-cta, .ir-card-cta, .rev-card-cta) > i:last-child { color:#fff; }
+
+/* ══════════════════════════════════════════════════════════
+   L1 — light theme retune (batch 1: palette, shared panels, hubs, articles).
+   Neutral grey-white page, pure white panels with a soft shadow, darker ink,
+   deeper accents, outline badges instead of pastel fills, neutral tags,
+   dark-fade article covers and white callouts with a coloured left rule.
+   ══════════════════════════════════════════════════════════ */
+html[data-theme="light"] {
+  /* I1 SIEM console — modelled on IBM Carbon (g10), the design language of IBM's security tools:
+     neutral grey page, white layers, near-black ink, one blue, square corners, borders instead of shadows */
+  --soc-bg:#f4f4f4; --soc-bg-1:#ffffff; --soc-bg-2:#f4f4f4;
+  --soc-line:#e0e0e0; --soc-line2:#c6c6c6;
+  --soc-ink:#161616; --soc-ink2:#393939; --soc-ink3:#525252; --soc-ink4:#6f6f6f;
+  --soc-cy:#0f62fe; --soc-cy2:#0043ce;
+  --soc-am:#8e6a00; --soc-gn:#198038; --soc-rd:#da1e28; --soc-vi:#8a3ffc;
+  --soc-cy-tint-lo:rgba(15,98,254,.05); --soc-cy-tint-md:rgba(15,98,254,.10); --soc-cy-tint-hi:#edf5ff;
+  --soc-cy-tint-bdr:rgba(15,98,254,.30); --soc-cy-tint-hov:rgba(15,98,254,.12);
+  --cy-soft:#edf5ff;
+  --l1-shadow:none;
+}
+[data-theme="light"] body,
+[data-theme="light"] .dark.min-h-screen { background:var(--soc-bg) !important; }
+[data-theme="light"] .dark.min-h-screen::before { display:none; }
+[data-theme="light"] .soc-tb { background:var(--soc-bg-1);box-shadow:none;border-bottom:1px solid var(--soc-line); }
+[data-theme="light"] .soc-page-hero { background:var(--soc-bg-1) !important; }
+[data-theme="light"] :is(.soc-page-hero-strap, .soc-hero-strap) { background:var(--soc-bg-2) !important; }
+
+/* panels: white + soft shadow so they lift off the grey page */
+[data-theme="light"] :is(.soc-page-hero, .res-card, .ir-card, .rev-card) { background-color:var(--soc-bg-1);box-shadow:var(--l1-shadow); }
+
+/* severity badges: white with a coloured outline instead of a pastel fill */
+[data-theme="light"] .sev        { background:var(--soc-bg-1); }
+[data-theme="light"] .sev.green  { background:var(--soc-bg-1);border-color:rgba(21,128,61,.45); }
+[data-theme="light"] .sev.cyan   { background:var(--soc-bg-1);border-color:rgba(15,98,254,.40); }
+[data-theme="light"] .sev.amber  { background:var(--soc-bg-1);border-color:rgba(180,83,9,.45); }
+[data-theme="light"] .sev.red    { background:var(--soc-bg-1);border-color:rgba(190,18,60,.40); }
+[data-theme="light"] .sev.violet { background:var(--soc-bg-1);border-color:rgba(109,40,217,.40); }
+
+/* tags: neutral chips, colour is reserved for state */
+[data-theme="light"] :is(.rev-tag, .res-tag, .ir-tag) { background:var(--soc-bg-2);border-color:var(--soc-line);color:var(--soc-ink2); }
+
+/* article cover: keep the dark fade so the image stays vivid and the title readable */
+[data-theme="light"] :is(.res-cover-overlay, .ir-cover-overlay) { background:linear-gradient(to top,rgba(11,18,32,.88) 0%,rgba(11,18,32,.35) 55%,transparent 100%); }
+[data-theme="light"] :is(.res-cover-title, .ir-cover-title) { color:#fff; }
+
+/* callouts: white card with a coloured left rule */
+[data-theme="light"] .res-callout { background:var(--soc-bg-1);border-color:var(--soc-line);border-left-width:3px;box-shadow:var(--l1-shadow);color:var(--soc-ink2); }
+[data-theme="light"] .res-callout.info    { background:var(--soc-bg-1);border-color:var(--soc-line);border-left-color:var(--soc-cy); }
+[data-theme="light"] .res-callout.warning { background:var(--soc-bg-1);border-color:var(--soc-line);border-left-color:var(--soc-am); }
+[data-theme="light"] .res-callout.tip     { background:var(--soc-bg-1);border-color:var(--soc-line);border-left-color:var(--soc-gn); }
+
+/* hub search + filter: white fields */
+[data-theme="light"] :is(.soc-search-bar, .soc-select) { background-color:var(--soc-bg-1); }
+
+/* P3: accent pieces that were hard-coded cyan */
+[data-theme="light"] .hub-feat-badge:not(.ir-card .hub-feat-badge):not(.rev-card .hub-feat-badge) { color:var(--soc-cy);background:rgba(15,98,254,.08);border-color:rgba(15,98,254,.35); }
+[data-theme="light"] .res-card .hub-feat-badge::before { background:var(--soc-cy);box-shadow:none; }
+[data-theme="light"] :is(code, .res-c, .ir-c) { background:rgba(15,98,254,.06);border-color:rgba(15,98,254,.18); }
+[data-theme="light"] .res-section-icon { background:rgba(15,98,254,.08);border-color:rgba(15,98,254,.25); }
+[data-theme="light"] :is(.res-toc-item, .ir-toc-item):hover { background:rgba(15,98,254,.07); }
+
+/* I1: Carbon conventions — square corners, no shadows or glows, 2px blue focus outline */
+html[data-theme="light"] *:not(img):not(.soc-av):not(.soc-av *):not(.soc-theme-btn):not(.soc-theme-btn *):not(:is(.res-card-cta, .ir-card-cta, .rev-card-cta) > i):not(.dot) { border-radius:0 !important; }
+html[data-theme="light"] *, html[data-theme="light"] *::before { box-shadow:none !important; text-shadow:none !important; }
+html[data-theme="light"] :focus-visible { outline:2px solid var(--soc-cy);outline-offset:1px; }
+html[data-theme="light"] :is(.res-card, .ir-card, .rev-card):hover { border-color:var(--hc); }
+
+/* D1: Carbon-style tags — very light tint of the status colour with a matching border; bars one step lighter */
+html[data-theme="light"] .sev.green  { background:#defbe6;border-color:#a7f0ba; }
+html[data-theme="light"] .sev.cyan   { background:#edf5ff;border-color:#a6c8ff; }
+html[data-theme="light"] .sev.amber  { background:#fcf4d6;border-color:#f1c21b; }
+html[data-theme="light"] .sev.red    { background:#fff1f1;border-color:#ffb3b8; }
+html[data-theme="light"] .sev.violet { background:#f6f2ff;border-color:#d4bbff; }
+html[data-theme="light"] .sev.sev-res { background:#d9fbfb;border-color:#9ef0f0; }
+html[data-theme="light"] .res-card .hub-feat-badge { background:#edf5ff;border-color:#a6c8ff; }
+html[data-theme="light"] .ir-card  .hub-feat-badge { background:#fff1f1;border-color:#ffb3b8; }
+html[data-theme="light"] .rev-card .hub-feat-badge { background:#fcf4d6;border-color:#f1c21b; }
+/* bars and fills: lift the data colours one step so they read lighter on white (neutral track segments untouched) */
+html[data-theme="light"] :is(.dist span, .act-seg, .bfill, .split-bar .sb):not([style*="soc-line"]) { filter:brightness(1.22) saturate(.85); }
