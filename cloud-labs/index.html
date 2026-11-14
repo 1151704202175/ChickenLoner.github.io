@@ -172,12 +172,33 @@
         GCP:   { icon: '🔴', color: 'var(--soc-rd)',  label: 'GCP' },
     };
 
+    /* Platform marks — each platform's square icon. Reuses the issuer logos the Certifications
+       page already ships (assets/issuers/) plus assets/platforms/; `paper` icons are drawn for a white
+       background, so their tile stays white in both themes. Unknown platforms fall back to a monogram. */
+    const PLAT_ICON = {
+        'BTLO':           { src:'/assets/platforms/btlo.png' },
+        'CyberDefenders': { src:'/assets/issuers/cyberdefenders.png' },
+        'HTB':            { src:'/assets/issuers/hackthebox.png' },
+        'HackTheBox':     { src:'/assets/issuers/hackthebox.png' },
+        'TryHackMe':      { src:'/assets/issuers/tryhackme.png' },
+        'CWL Infinity':   { src:'/assets/issuers/CWL.png' },
+        'Xintra':         { src:'/assets/platforms/xintra.png', paper:true },
+        'XINTRA':         { src:'/assets/platforms/xintra.png', paper:true },
+        'DFIR Labs':      { src:'/assets/platforms/dfirlabs.png', paper:true },
+        'Ace Responder':  { src:'/assets/platforms/aceresponder.svg', paper:true },
+    };
+    const PlatMark = ({ p, sm }) => {
+        const ic = PLAT_ICON[p];
+        if (ic) return <span className={`lab-mark logo${ic.paper ? ' paper' : ''}${sm ? ' sm' : ''}`} aria-hidden="true"><img src={ic.src} alt="" loading="lazy" /></span>;
+        return <span className={`lab-mark${sm ? ' sm' : ''}`} aria-hidden="true">{p.replace(/[^A-Za-z]/g, '').slice(0, 3).toUpperCase()}</span>;
+    };
+
     /* ── App ── */
     const App = () => {
         const [sections, setSections]     = useState([]);
         const [loading, setLoading]       = useState(true);
         const [error, setError]           = useState(null);
-        const [providerFilter, setProviderFilter] = useState('all');
+        const [tab, setTab]                       = useState(null);
         const [platFilter, setPlatFilter]         = useState('all');
         const [diffFilter, setDiffFilter]         = useState('all');
         const [freeOnly, setFreeOnly]             = useState(false);
@@ -195,14 +216,27 @@
         const platforms = useMemo(() => [...new Set(allLabs.map(l => l.platform))].filter(Boolean).sort(), [allLabs]);
         const DIFFS     = ['Easy', 'Medium', 'Hard', 'Insane'];
 
-        const filtered = useMemo(() => allLabs.filter(lab => {
-            if (providerFilter !== 'all' && lab.provider   !== providerFilter) return false;
-            if (platFilter     !== 'all' && lab.platform   !== platFilter)     return false;
-            if (diffFilter     !== 'all' && lab.difficulty !== diffFilter)     return false;
-            if (freeOnly && lab.pricing !== 'Free') return false;
-            if (search && !lab.name.toLowerCase().includes(search.toLowerCase())) return false;
-            return true;
-        }), [allLabs, providerFilter, platFilter, diffFilter, freeOnly, search]);
+        /* U2: one tab per provider. matches() applies every filter except the tab
+           (and, with ignorePlat, except the platform) so tabs and platform pills can show live counts. */
+        const q = search.trim().toLowerCase();
+        const matches = (lab, ignorePlat) =>
+            (ignorePlat || platFilter === 'all' || lab.platform === platFilter) &&
+            (diffFilter === 'all' || lab.difficulty === diffFilter) &&
+            (!freeOnly || lab.pricing === 'Free') &&
+            (!q || lab.name.toLowerCase().includes(q) || lab.platform.toLowerCase().includes(q));
+        const groups = useMemo(() => ['AWS', 'Azure', 'GCP', 'Other']
+            .map(key => ({ key, label: key, color: PROVIDER_META[key]?.color || 'var(--soc-ink3)', labs: allLabs.filter(l => l.provider === key) }))
+            .filter(g => g.labs.length), [allLabs]);
+        const activeKey = groups.some(g => g.key === tab) ? tab : groups[0]?.key;
+        const active    = groups.find(g => g.key === activeKey);
+        const inTab     = active ? active.labs : [];
+        const shown     = inTab.filter(l => matches(l));
+        const tabCount  = g => g.labs.filter(l => matches(l)).length;
+        const platCounts = [...new Set(inTab.map(l => l.platform))].sort()
+            .map(p => [p, inTab.filter(l => l.platform === p && matches(l, true)).length]);
+        const anyFilter = platFilter !== 'all' || diffFilter !== 'all' || freeOnly || q;
+        const clearFilters = () => { setPlatFilter('all'); setDiffFilter('all'); setFreeOnly(false); setSearch(''); };
+        const elsewhere = groups.filter(g => g.key !== activeKey && tabCount(g) > 0);
 
         const stats = useMemo(() => {
             const byProvider = (p) => allLabs.filter(l => l.provider === p).length;
@@ -216,7 +250,7 @@
         }, [allLabs]);
 
         return (
-            <div style={{minHeight:'100vh',background:'var(--soc-bg)'}}>
+            <div className="lab-hub" style={{minHeight:'100vh',background:'var(--soc-bg)'}}>
                 {/* Top bar */}
                 <div className="soc-tb">
                     <div className="soc-tb-row">
@@ -246,39 +280,36 @@
                                 <div className="seg"><b>source</b> <span className="v">github/awesome-cloud-labs</span></div>
                                 <span style={{marginLeft:'auto'}} className="sev green"><span className="dot"></span>ACTIVE</span>
                             </div>
-                            <div className="soc-page-hero-body">
-                                <div className="soc-page-hero-icon">
-                                    <Icon name="Cloud" className="w-6 h-6" style={{color:'var(--soc-vi)'}} />
+                            {/* C2: slim header bar — title, description and stats on the left; search on the right */}
+                            <div className="hub-bar">
+                                <div className="soc-page-hero-body">
+                                    <div className="soc-page-hero-icon">
+                                        <Icon name="Cloud" className="w-6 h-6" style={{color:'var(--soc-vi)'}} />
+                                    </div>
+                                    <div style={{minWidth:0}}>
+                                        <h1 className="soc-page-hero-title">Awesome Cloud Investigation Labs</h1>
+                                        <p className="soc-page-hero-sub">aws · azure · gcp · curated from top cybersecurity platforms · always up to date</p>
+                                        {!loading && !error && (
+                                            <div className="hub-chips">
+                                                <span><b>{stats.total}</b> labs</span>
+                                                <span><b>{stats.aws}</b> AWS</span>
+                                                <span><b>{stats.azure}</b> Azure</span>
+                                                <span><b>{stats.gcp}</b> GCP</span>
+                                                <span><b>{stats.free}</b> free</span>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                                <div>
-                                    <h1 className="soc-page-hero-title">Awesome Cloud Investigation Labs</h1>
-                                    <p className="soc-page-hero-sub">aws · azure · gcp · curated from top cybersecurity platforms · always up to date</p>
-                                </div>
+                                {!loading && !error && (
+                                    <div className="hub-controls">
+                                        <div className="soc-search-bar">
+                                            <Icon name="Search" className="w-4 h-4" style={{color:'var(--soc-ink4)',flexShrink:0}} />
+                                            <input type="text" placeholder="Search labs…" value={search}
+                                                onChange={e => setSearch(e.target.value)} aria-label="Search labs" />
+                                        </div>
+                                    </div>
+                                )}
                             </div>
-                            {!loading && !error && (
-                                <div className="soc-hs-bar">
-                                    <div className="soc-hs-cell">
-                                        <div className="soc-hs-lbl">Total</div>
-                                        <div className="soc-hs-val">{stats.total}</div>
-                                    </div>
-                                    <div className="soc-hs-cell">
-                                        <div className="soc-hs-lbl am">AWS</div>
-                                        <div className="soc-hs-val">{stats.aws}</div>
-                                    </div>
-                                    <div className="soc-hs-cell">
-                                        <div className="soc-hs-lbl cy">Azure</div>
-                                        <div className="soc-hs-val">{stats.azure}</div>
-                                    </div>
-                                    <div className="soc-hs-cell">
-                                        <div className="soc-hs-lbl rd">GCP</div>
-                                        <div className="soc-hs-val">{stats.gcp}</div>
-                                    </div>
-                                    <div className="soc-hs-cell">
-                                        <div className="soc-hs-lbl gn">Free</div>
-                                        <div className="soc-hs-val">{stats.free}</div>
-                                    </div>
-                                </div>
-                            )}
                         </div>
 
                         {/* Loading */}
@@ -300,118 +331,63 @@
                         {/* Content */}
                         {!loading && !error && (
                             <>
-                                {/* Filters */}
-                                <div className="soc-filter-panel">
-                                    <div className="soc-search-bar">
-                                        <Icon name="Search" className="w-4 h-4" style={{color:'var(--soc-ink4)',flexShrink:0}} />
-                                        <input
-                                            type="text"
-                                            placeholder="Search labs…"
-                                            value={search}
-                                            onChange={e => setSearch(e.target.value)}
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <div className="soc-filter-label">Cloud Provider</div>
-                                        <div className="soc-pills">
-                                            <button className={`soc-pill ${providerFilter === 'all' ? 'active' : ''}`} onClick={() => setProviderFilter('all')}>All</button>
-                                            {providers.map(p => (
-                                                <button key={p}
-                                                    className={`soc-pill ${providerFilter === p ? 'active' : ''}`}
-                                                    onClick={() => setProviderFilter(p)}>
-                                                    {p}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div className="soc-filter-label">Platform</div>
-                                        <div className="soc-pills">
-                                            <button className={`soc-pill ${platFilter === 'all' ? 'active' : ''}`} onClick={() => setPlatFilter('all')}>All</button>
-                                            {platforms.map(p => (
-                                                <button key={p}
-                                                    className={`soc-pill ${platFilter === p ? 'active' : ''}`}
-                                                    onClick={() => setPlatFilter(p)}>
-                                                    {p}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div className="soc-filter-label">Difficulty</div>
-                                        <div className="soc-pills">
-                                            <button className={`soc-pill ${diffFilter === 'all' ? 'active' : ''}`} onClick={() => setDiffFilter('all')}>All</button>
-                                            {DIFFS.map(d => (
-                                                <button key={d}
-                                                    className={`soc-pill ${diffFilter === d ? 'active' : ''}`}
-                                                    onClick={() => setDiffFilter(d)}>
-                                                    {d}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    <div style={{paddingTop:'4px',borderTop:'1px solid var(--soc-line)'}}>
-                                        <button
-                                            className={`soc-toggle ${freeOnly ? 'active' : ''}`}
-                                            onClick={() => setFreeOnly(f => !f)}>
-                                            {freeOnly ? '✓ ' : ''}Free Only
+                                {/* U2: provider tabs — the count on each tab follows the filters and search */}
+                                <div className="lab-tabs" role="tablist" aria-label="Cloud provider">
+                                    {groups.map(g => (
+                                        <button key={g.key} role="tab" aria-selected={g.key === activeKey}
+                                            className={`lab-tab ${g.key === activeKey ? 'on' : ''}`} style={{'--gc': g.color}}
+                                            onClick={() => { setTab(g.key); setPlatFilter('all'); }}>
+                                            <span className="lab-tab-dot"></span>{g.label}<span className="lab-tab-n">{tabCount(g)}</span>
                                         </button>
+                                    ))}
+                                </div>
+
+                                <div className="lab-filters">
+                                    <div className="lab-plats" role="group" aria-label="Platform">
+                                        <button className={`lab-plat all ${platFilter === 'all' ? 'on' : ''}`} aria-pressed={platFilter === 'all'} onClick={() => setPlatFilter('all')}>All platforms</button>
+                                        {platCounts.map(([p, n]) => (
+                                            <button key={p} className={`lab-plat ${platFilter === p ? 'on' : ''}`} aria-pressed={platFilter === p}
+                                                disabled={!n && platFilter !== p} onClick={() => setPlatFilter(platFilter === p ? 'all' : p)}>
+                                                <PlatMark p={p} sm />{p}<span className="lab-plat-n">{n}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <div className="lab-filters-row">
+                                        <div className="lab-seg" role="group" aria-label="Difficulty">
+                                            {['all', ...DIFFS].map(d => (
+                                                <button key={d} className={diffFilter === d ? 'on' : ''} aria-pressed={diffFilter === d} onClick={() => setDiffFilter(d)}>{d === 'all' ? 'All' : d}</button>
+                                            ))}
+                                        </div>
+                                        <button className={`lab-toggle ${freeOnly ? 'on' : ''}`} aria-pressed={freeOnly} onClick={() => setFreeOnly(f => !f)}>Free only</button>
+                                        {anyFilter && <button className="lab-clear" onClick={clearFilters}>Clear filters</button>}
+                                        <span className="lab-count"><b>{shown.length}</b> of {inTab.length} {active?.label} labs</span>
                                     </div>
                                 </div>
 
-                                {/* Section label */}
-                                <h2 className="soc-section">
-                                    Lab Index
-                                    <span className="meta">
-                                        <b style={{color:'var(--soc-vi)'}}>{filtered.length}</b> of {allLabs.length} labs
-                                    </span>
-                                </h2>
-
-                                {/* Table */}
-                                <div className="soc-table-wrap">
-                                    <table className="soc-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Lab Name</th>
-                                                <th>Platform</th>
-                                                <th>Difficulty</th>
-                                                <th>Pricing</th>
-                                                <th>Provider</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {filtered.map((lab, i) => {
-                                                const pricingColor = lab.pricing === 'Free' ? 'var(--soc-gn)' : lab.pricing === 'Premium' ? 'var(--soc-am)' : 'var(--soc-ink3)';
-                                                return (
-                                                    <tr key={i}>
-                                                        <td className="lab-name">{lab.name}</td>
-                                                        <td><span className="soc-plat">{lab.platform}</span></td>
-                                                        <td><span className={`soc-diff ${diffClass(lab.difficulty)}`}>{lab.difficulty || '—'}</span></td>
-                                                        <td style={{color:pricingColor,fontSize:'11px',fontFamily:"'JetBrains Mono',monospace"}}>{lab.pricing}</td>
-                                                        <td><span className={`soc-prov ${provClass(lab.provider)}`}>{lab.provider}</span></td>
-                                                        <td style={{textAlign:'right'}}>
-                                                            <a href={lab.url} target="_blank" rel="noopener noreferrer" className="soc-open-btn">
-                                                                Open ↗
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                );
-                                            })}
-                                            {filtered.length === 0 && (
-                                                <tr>
-                                                    <td colSpan={6} style={{textAlign:'center',padding:'48px',color:'var(--soc-ink3)',fontFamily:"'JetBrains Mono',monospace",fontSize:'12px'}}>
-                                                        No labs match your filters
-                                                    </td>
-                                                </tr>
-                                            )}
-                                        </tbody>
-                                    </table>
+                                {/* U1: compact rows — the whole row opens the lab */}
+                                <div className="lab-rows">
+                                    {shown.map((lab, i) => (
+                                        <a key={i} className="lab-row" href={lab.url} target="_blank" rel="noopener noreferrer">
+                                            <PlatMark p={lab.platform} />
+                                            <div className="lab-row-body">
+                                                <div className="lab-row-name">{lab.name}</div>
+                                                <div className="lab-row-meta">
+                                                    <span className="lab-row-plat">{lab.platform}</span>
+                                                    {lab.difficulty && <span className={`soc-diff ${diffClass(lab.difficulty)}`}>{lab.difficulty}</span>}
+                                                    {lab.pricing === 'Free' && <span className="lab-tag free">Free</span>}
+                                                    {(lab.pricing === 'Premium' || lab.pricing === 'Pay per access') && <span className="lab-tag paid">{lab.pricing}</span>}
+                                                </div>
+                                            </div>
+                                            <span className="lab-row-go" aria-hidden="true"><Icon name="ArrowUpRight" className="w-4 h-4" /></span>
+                                        </a>
+                                    ))}
                                 </div>
+                                {shown.length === 0 && (
+                                    <div className="lab-empty">
+                                        No {active?.label} labs match these filters.
+                                        {elsewhere.length > 0 && <div>{elsewhere.map(g => <button key={g.key} onClick={() => setTab(g.key)}>{tabCount(g)} in {g.label}</button>)}</div>}
+                                    </div>
+                                )}
 
                                 <div className="soc-ft">
                                     Data fetched live from{' '}
