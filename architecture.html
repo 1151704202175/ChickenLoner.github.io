@@ -1056,6 +1056,7 @@ const ratingLabel = l =&gt; ... "&#9733; 4.8"  on a 5-point scale
                 (<code>external: true</code>, opened in a new tab): <b>Write-Ups</b> → <code>writeups.chicken0248.fyi</code>
                 and <b>CTF</b> → <code>ctf.chicken0248.fyi</code>. The CTF platform is a separate project
                 (Astro + Cloudflare Pages, private repo) and is not built from this repository.</p>
+            <p>External nav entries carry a <code>group</code> (<code>writing</code> → Research, IR Reports, Reviews; <code>labs</code> → Cloud Labs, SIEM Labs; <code>offsite</code> → Write-Ups, CTF). <code>NAV_GROUPS</code> sets the group order and the mobile-menu section titles (Writing / Lab Hubs / Elsewhere); the desktop tab bar draws a <code>.soc-nav-sep</code> divider before each group. A new external link needs a <code>group</code> or it will not render.</p>
             <div class="tbl-wrap">
                 <table>
                     <thead><tr><th>URL</th><th>File</th></tr></thead>

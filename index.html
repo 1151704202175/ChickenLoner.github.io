@@ -1308,14 +1308,16 @@
                 { id: 'labs', label: 'Labs & Projects', icon: 'Code' },
                 { id: 'achievements', label: 'Achievements', icon: 'Star' },
                 { id: 'stats', label: 'Stats', icon: 'BarChart2' },
-                { id: 'ir-reports', label: 'IR Reports', icon: 'FileText', external: true, url: '/ir-reports/index.html' },
-                { id: 'cloud-labs', label: 'Cloud Labs', icon: 'Cloud', external: true, url: '/cloud-labs/index.html' },
-                { id: 'siem-labs', label: 'SIEM Labs', icon: 'Shield', external: true, url: '/siem-labs/index.html' },
-                { id: 'research', label: 'Research', icon: 'ScrollText', external: true, url: '/research/index.html' },
-                { id: 'reviews', label: 'Reviews', icon: 'Star', external: true, url: '/reviews/index.html' },
-                { id: 'writeups', label: 'Write-Ups', icon: 'BookOpen', external: true, url: 'https://writeups.chicken0248.fyi' },
-                { id: 'ctf', label: 'CTF', icon: 'Flag', external: true, url: 'https://ctf.chicken0248.fyi' },
+                // N1: external links are grouped — writing, lab hubs, then off-site links (a divider between groups)
+                { id: 'research', label: 'Research', icon: 'ScrollText', external: true, group: 'writing', url: '/research/index.html' },
+                { id: 'ir-reports', label: 'IR Reports', icon: 'FileText', external: true, group: 'writing', url: '/ir-reports/index.html' },
+                { id: 'reviews', label: 'Reviews', icon: 'Star', external: true, group: 'writing', url: '/reviews/index.html' },
+                { id: 'cloud-labs', label: 'Cloud Labs', icon: 'Cloud', external: true, group: 'labs', url: '/cloud-labs/index.html' },
+                { id: 'siem-labs', label: 'SIEM Labs', icon: 'Shield', external: true, group: 'labs', url: '/siem-labs/index.html' },
+                { id: 'writeups', label: 'Write-Ups', icon: 'BookOpen', external: true, group: 'offsite', url: 'https://writeups.chicken0248.fyi' },
+                { id: 'ctf', label: 'CTF', icon: 'Flag', external: true, group: 'offsite', url: 'https://ctf.chicken0248.fyi' },
             ];
+            const NAV_GROUPS = [['writing','Writing'],['labs','Lab Hubs'],['offsite','Elsewhere']];
 
 
             const HomePage = () => {
@@ -3579,13 +3581,18 @@
                                     </button>
                                 ))}
                                 <div className="soc-divider" />
-                                <div className="soc-mobile-section">Content</div>
-                                {navigation.filter(i => i.external).map((item) => (
-                                    <a key={item.id} href={item.url} className="soc-mobile-item" onClick={() => setMobileMenuOpen(false)}>
-                                        <Icon name={item.icon} className="w-4 h-4" />
-                                        <span>{item.label}</span>
-                                        <Icon name="ExternalLink" className="w-3 h-3" style={{marginLeft:'auto',opacity:.5}} />
-                                    </a>
+                                {NAV_GROUPS.map(([g, title], gi) => (
+                                    <React.Fragment key={g}>
+                                        {gi > 0 && <div className="soc-divider" />}
+                                        <div className="soc-mobile-section">{title}</div>
+                                        {navigation.filter(i => i.group === g).map((item) => (
+                                            <a key={item.id} href={item.url} className="soc-mobile-item" onClick={() => setMobileMenuOpen(false)}>
+                                                <Icon name={item.icon} className="w-4 h-4" />
+                                                <span>{item.label}</span>
+                                                <Icon name="ExternalLink" className="w-3 h-3" style={{marginLeft:'auto',opacity:.5}} />
+                                            </a>
+                                        ))}
+                                    </React.Fragment>
                                 ))}
                             </div>
                         )}
@@ -3599,12 +3606,16 @@
                                     <span>{item.label}</span>
                                 </button>
                             ))}
-                            <span className="soc-nav-sep" aria-hidden="true" />
-                            {navigation.filter(i => i.external).map(item => (
-                                <a key={item.id} href={item.url} className="soc-tab">
-                                    <span className="ix">↗</span>
-                                    <span>{item.label}</span>
-                                </a>
+                            {NAV_GROUPS.map(([g]) => (
+                                <React.Fragment key={g}>
+                                    <span className="soc-nav-sep" aria-hidden="true" />
+                                    {navigation.filter(i => i.group === g).map(item => (
+                                        <a key={item.id} href={item.url} className="soc-tab">
+                                            <span className="ix">↗</span>
+                                            <span>{item.label}</span>
+                                        </a>
+                                    ))}
+                                </React.Fragment>
                             ))}
                         </div>
                     </nav>
