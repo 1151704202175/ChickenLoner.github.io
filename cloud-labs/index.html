@@ -278,6 +278,15 @@
                             <div className="soc-page-hero-strap">
                                 <div className="seg"><b>console</b> <span className="v">portfolio/cloud-labs</span></div>
                                 <div className="seg"><b>source</b> <span className="v">github/awesome-cloud-labs</span></div>
+                                {/* J1: switch between the two lab collections */}
+                                <nav className="lab-switch" aria-label="Lab collections">
+                                    <a href="/cloud-labs/" className="cloud on" aria-current="page">
+                                        <Icon name="Cloud" className="w-3.5 h-3.5" />Cloud Labs{!loading && !error && <span className="lab-switch-n">{stats.total}</span>}
+                                    </a>
+                                    <a href="/siem-labs/" className="siem">
+                                        <Icon name="ScanSearch" className="w-3.5 h-3.5" />SIEM Labs
+                                    </a>
+                                </nav>
                                 <span style={{marginLeft:'auto'}} className="sev green"><span className="dot"></span>ACTIVE</span>
                             </div>
                             {/* C2: slim header bar — title, description and stats on the left; search on the right */}

@@ -1352,3 +1352,17 @@ html[data-theme="light"] .lab-mark.sm { border-radius:5px !important; }
   .lab-seg button { flex:1 0 auto; }
   .lab-row-name { white-space:normal; }
 }
+
+/* J1: Cloud Labs ⇄ SIEM Labs switcher in the lab pages' header strap */
+.lab-switch { display:inline-flex;margin-left:12px;border:1px solid var(--soc-line2);border-radius:5px;overflow:hidden;background:var(--soc-bg-1); }
+.lab-switch a { --sc:var(--soc-vi);white-space:nowrap;display:inline-flex;align-items:center;gap:6px;padding:4px 11px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--soc-ink3);text-decoration:none;transition:color .15s,background-color .15s; }
+.lab-switch a.siem { --sc:var(--soc-am); }
+.lab-switch a + a { border-left:1px solid var(--soc-line2); }
+.lab-switch a:hover { color:var(--sc);text-decoration:none;background:color-mix(in srgb, var(--sc) 6%, transparent); }
+.lab-switch a.on { color:var(--sc);background:color-mix(in srgb, var(--sc) 14%, transparent); }
+.lab-switch-n { font-size:10px;padding:0 6px;border-radius:99px;background:color-mix(in srgb, var(--sc) 18%, transparent); }
+@media (max-width:768px) {
+  .soc-page-hero-strap:has(.lab-switch) { flex-wrap:wrap;row-gap:10px; }
+  .lab-switch { margin-left:0;order:3;flex:1 1 100%; }
+  .lab-switch a { flex:1;justify-content:center; }
+}
