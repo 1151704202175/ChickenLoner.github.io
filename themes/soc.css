@@ -1176,3 +1176,23 @@ html[data-theme="light"] {
 /* C1: research / IR covers carry their title at the top, so crop from the bottom
    (cards, featured card and the article-page cover) and zoom on hover from the top edge. */
 :is(.res-card-cover, .ir-card-cover, .res-cover, .ir-cover) img { object-position:center top;transform-origin:center top; }
+
+/* H1: Labs-row style hover for hub cards (Research cyan / IR red / Reviews amber).
+   The card gets a faint tint + accent border, the trailing arrow of the "Read …" row becomes a
+   round button that fills and glows on hover (like the Labs play button), and the global
+   a:hover underline is suppressed on the whole card. */
+.res-card { --hc:var(--soc-cy); }
+.ir-card  { --hc:var(--soc-rd); }
+.rev-card { --hc:var(--soc-am); }
+:is(.res-card, .ir-card, .rev-card) { transition:border-color .15s,box-shadow .15s,background-color .15s; }
+:is(.res-card, .ir-card, .rev-card):hover { text-decoration:none;background-color:color-mix(in srgb, var(--hc) 5%, var(--soc-bg-1));border-color:color-mix(in srgb, var(--hc) 45%, transparent); }
+:is(.res-card-cta, .ir-card-cta, .rev-card-cta) > i:last-child {
+  width:26px;height:26px;margin:-6px 0;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;
+  border:1px solid color-mix(in srgb, var(--hc) 35%, transparent);background:color-mix(in srgb, var(--hc) 8%, transparent);color:var(--hc);
+  transition:background-color .15s,border-color .15s,color .15s,box-shadow .15s;
+}
+:is(.res-card-cta, .ir-card-cta, .rev-card-cta) > i:last-child svg { width:14px;height:14px; }
+:is(.res-card, .ir-card, .rev-card):hover :is(.res-card-cta, .ir-card-cta, .rev-card-cta) > i:last-child {
+  background:var(--hc);border-color:var(--hc);color:#001520;box-shadow:0 0 14px color-mix(in srgb, var(--hc) 40%, transparent);
+}
+html[data-theme="light"] :is(.res-card, .ir-card, .rev-card):hover :is(.res-card-cta, .ir-card-cta, .rev-card-cta) > i:last-child { color:#fff; }
