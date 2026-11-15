@@ -59,6 +59,7 @@ If the badge file doesn't exist yet, note it to the user and use the placeholder
 
 4. Write the updated file. Preserve all existing entries exactly — do not reformat, reorder, or change any other entry.
 5. **Capability Matrix evidence:** the Home page counts certs per skill track from `data/skills.json` → `evidence.certs` (cert code = the part of `name` before " - ", or the full name if there is no " - "). Add the new cert's code to the matching track(s) — e.g. a DFIR cert goes in `DF-06` (and `NF-07` if it is network forensics), a SOC cert in `BT-04`. If no track fits, tell the user rather than inventing one. Include `data/skills.json` in the commit when changed.
+6. **Issuer logo:** if the `issuer` is new (no other cert has it), check `index.html` for it in `ISSUER_LOGOS` (defined twice: stats roster and Certifications By Issuer, so update both copies) and `ISSUER_BROW_LOGOS`. Without an entry the issuer tile falls back to initials. Get the issuer's own logo from their site (a transparent square icon such as `apple-touch-icon.png` works well), save it as `assets/issuers/<slug>.png`, and add the key to both `ISSUER_LOGOS` copies. Add an `ISSUER_BROW_LOGOS` entry only if the issuer publishes a wordmark (`<slug>_withname.*`, or `<slug>_white.*` when it has dark text).
 
 ## Step 4 — Commit
 
@@ -73,4 +74,5 @@ git push origin main
 Tell the user:
 - The cert was added to which category
 - Whether the badge file needs to be copied to `assets/badges/`
+- Whether a new issuer logo was added (or still needs one)
 - That it will appear immediately in the Certifications page marquee and categorized section
