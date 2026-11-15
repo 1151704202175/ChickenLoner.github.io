@@ -187,7 +187,8 @@
         "CBTeamerX",
         "CSOA",
         "CDA",
-        "CCSA"
+        "CCSA",
+        "CCCD"
       ],
       "labs": [
         "Threat Hunting",
