@@ -1,5 +1,16 @@
 [
   {
+    "title": "CCCD Exam Review: A 3D Shift as a Cyber Defender",
+    "excerpt": "A review of the CYBRIXEN Certified Cyber Defender (CCCD), a hands-on exam played as a 3D office shift: 8 missions in 120 minutes covering phishing triage, access review, a clean-desk walk, firewall hardening, SIEM, light Linux forensics and ransomware response. Covers the practice room, my 95/100 run and who it is for.",
+    "date": "November 2026",
+    "readTime": "7 min read",
+    "tags": ["CCCD", "CYBRIXEN", "Blue Team", "SOC", "Beginner"],
+    "url": "/reviews/cccd/index.html",
+    "image": "/assets/badges/cccd.png",
+    "difficulty": "Beginner",
+    "rating": 4.5
+  },
+  {
     "title": "GNFA Exam Review: Cert for a Real Network Forensic Analyst",
     "excerpt": "A review of the GIAC Network Forensic Analyst (GNFA) certification. Covers passing without the FOR572 course, building an AI-assisted cheat sheet from the course outline, the 66-question exam with 11 CyberLive questions, and how it compares to GCIA.",
     "date": "October 2026",
