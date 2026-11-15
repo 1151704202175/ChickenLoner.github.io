@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCCD Exam Review: A 3D Shift as a Cyber Defender | Chicken0248</title>
+    <meta name="description" content="A review of the CYBRIXEN Certified Cyber Defender (CCCD): a hands-on exam played as a 3D office shift, with 8 missions in 120 minutes from phishing triage to ransomware response." />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Chicken0248" />
+    <meta property="og:url" content="https://chicken0248.fyi/reviews/cccd/" />
+    <meta property="og:title" content="CCCD Exam Review: A 3D Shift as a Cyber Defender" />
+    <meta property="og:description" content="A review of the CYBRIXEN Certified Cyber Defender (CCCD): a hands-on exam played as a 3D office shift, with 8 missions in 120 minutes from phishing triage to ransomware response." />
+    <meta property="og:image" content="https://chicken0248.fyi/reviews/cccd/cover.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Chicken_0248" />
+    <meta name="twitter:title" content="CCCD Exam Review: A 3D Shift as a Cyber Defender" />
+    <meta name="twitter:description" content="A review of the CYBRIXEN Certified Cyber Defender (CCCD): a hands-on exam played as a 3D office shift, with 8 missions in 120 minutes from phishing triage to ransomware response." />
+    <meta name="twitter:image" content="https://chicken0248.fyi/reviews/cccd/cover.png" />
+    <link rel="canonical" href="https://chicken0248.fyi/reviews/cccd/" />
+    <link rel="icon" href="/chicken0248.png" type="image/png">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.2/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@1.14.0/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="/themes/soc.css">
+    <script src="/themes/soc-theme.js"></script>
+    <script src="/themes/soc-nav.js"></script>
+    <script src="/themes/soc-components.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "CCCD Exam Review: A 3D Shift as a Cyber Defender",
+      "description": "A review of the CYBRIXEN Certified Cyber Defender (CCCD): a hands-on exam played as a 3D office shift, with 8 missions in 120 minutes from phishing triage to ransomware response.",
+      "image": "https://chicken0248.fyi/reviews/cccd/cover.png",
+      "author": { "@type": "Person", "name": "Chicken0248", "url": "https://chicken0248.fyi/" },
+      "publisher": { "@type": "Person", "name": "Chicken0248", "url": "https://chicken0248.fyi/" },
+      "datePublished": "2026-11-15",
+      "dateModified": "2026-11-15",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://chicken0248.fyi/reviews/cccd/" },
+      "url": "https://chicken0248.fyi/reviews/cccd/"
+    }
+    </script>
+</head>
+<body>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg focus:text-blue-600 focus:font-semibold">Skip to content</a>
+    <noscript>
+      <style>body{font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}</style>
+      <div style="text-align:center;padding:2rem"><h1>JavaScript required</h1><p>This site requires JavaScript to display content. Please enable it in your browser settings.</p><a href="https://chicken0248.fyi">chicken0248.fyi</a></div>
+    </noscript>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const { SocClock, Icon, Section, Fig, resetFigCount, TipList, B, A, Code, ThemeToggle } = window.SocComponents;
+
+        const Callout = ({ children }) => (
+            <blockquote className="bg-amber-50 border-l-4 border-amber-400 rounded-r-xl px-5 py-4 my-4 text-gray-700 italic text-sm leading-relaxed">
+                {children}
+            </blockquote>
+        );
+
+        const renderStars = (rating) => {
+            const full = Math.floor(rating);
+            const half = rating - full >= 0.5;
+            return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(5 - full - (half ? 1 : 0));
+        };
+
+        const App = () => {
+            const [meta, setMeta] = useState(null);
+
+            useEffect(() => {
+                fetch('/data/reviews.json')
+                    .then(r => r.json())
+                    .then(data => {
+                        const entry = data.find(r => r.url === '/reviews/cccd/index.html');
+                        if (entry) setMeta(entry);
+                    })
+                    .catch(() => {});
+            }, []);
+
+            resetFigCount();
+
+            const tocItems = [
+                { id: 'introduction', label: 'Introduction', icon: 'BookOpen' },
+                { id: 'prior-to-the-exam', label: 'Prior to the Exam', icon: 'ListChecks' },
+                { id: 'exam-experience', label: 'Exam Experience', icon: 'ClipboardList' },
+                { id: 'review-summary', label: 'Review Summary', icon: 'Star' },
+            ];
+
+            return (
+                <div style={{background:'var(--soc-bg)',minHeight:'100vh'}}>
+
+                    {/* SOC Topbar */}
+                    <nav className="soc-tb" aria-label="Site navigation">
+                        <div className="soc-tb-row">
+                            <a href="/" className="soc-live" style={{textDecoration:"none",color:"inherit"}}>UPLINK</a>
+                            <div className="soc-crumb hidden md:flex">
+                                <a href="/" style={{color:'var(--soc-ink3)',textDecoration:'none'}}>SOC</a>
+                                <span>/</span>
+                                <a href="/" style={{color:'var(--soc-ink3)',textDecoration:'none'}}>OPERATOR.PROFILE</a>
+                                <span>/</span>
+                                <a href="/reviews/index.html" style={{color:'var(--soc-ink3)',textDecoration:'none'}}>REVIEWS</a>
+                                <span>/</span>
+                                <b>CCCD</b>
+                            </div>
+                            <div style={{flex:1}} />
+                            <span className="sev cyan hidden md:inline-flex"><span className="dot"></span>TLP:CLEAR</span>
+                            <span className="sev amber hidden md:inline-flex"><span className="dot"></span>CERT.REVIEW</span>
+                            <span className="hidden md:block"><SocClock /></span><ThemeToggle />
+                        </div>
+                    </nav>
+
+                    <main id="main-content" className="soc-article animate-fadeIn">
+
+                        {/* Cover — hero image, NOT a Fig */}
+                        <div className="res-cover">
+                            <img src="cover.png" alt="CCCD Exam Review: A 3D Shift as a Cyber Defender" />
+                            <div className="res-cover-overlay" />
+                            <div className="res-cover-content">
+                                <h1 className="res-cover-title">CCCD Exam Review: A 3D Shift as a Cyber Defender</h1>
+                                <div className="res-cover-badges">
+                                    <span className="sev cyan"><span className="dot"></span>November 2026</span>
+                                    <span className="sev amber"><span className="dot"></span>CYBRIXEN</span>
+                                    <span className="sev green"><span className="dot"></span>Passed</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Metadata strip — difficulty and rating always from meta, never hardcoded */}
+                        <div className="res-meta-grid">
+                            <div><div className="res-meta-lbl">Certification</div><div className="res-meta-val">CCCD</div></div>
+                            <div><div className="res-meta-lbl">Provider</div><div className="res-meta-val">CYBRIXEN</div></div>
+                            <div><div className="res-meta-lbl">Difficulty</div><div className="res-meta-val" style={{color:'var(--soc-am)'}}>{meta?.difficulty ?? '—'}</div></div>
+                            <div><div className="res-meta-lbl">Rating</div>
+                                <div className="res-meta-val">
+                                    {meta?.rating ? (
+                                        <span style={{display:'flex',alignItems:'center',gap:'4px'}}>
+                                            <span style={{color:'var(--soc-am)'}}>{renderStars(meta.rating)}</span>
+                                            <span style={{color:'var(--soc-ink3)',fontSize:'11px'}}>{meta.rating.toFixed(1)}/5.0</span>
+                                        </span>
+                                    ) : <span style={{color:'var(--soc-ink4)'}}>—</span>}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Table of Contents */}
+                        <div className="res-toc">
+                            <div className="res-toc-title">// TABLE OF CONTENTS</div>
+                            <div className="res-toc-grid">
+                                {tocItems.map((item, i) => (
+                                    <a key={item.id} href={`#${item.id}`} className="res-toc-item">
+                                        <span className="res-toc-num">{String(i+1).padStart(2,'0')}.</span>
+                                        <Icon name={item.icon} className="w-3.5 h-3.5" style={{color:'var(--soc-ink4)',flexShrink:0}} />
+                                        <span>{item.label}</span>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* ═══════════ 01. INTRODUCTION ═══════════ */}
+                        <Section id="introduction" title="Introduction" icon="BookOpen">
+                            <p className="text-gray-700 leading-relaxed">
+                                Hello everyone, <B>Chicken0248</B> here again with the <B>CYBRIXEN Certified Cyber Defender (CCCD)</B>, my second blue team certification from CYBRIXEN after CCSA. To be completely honest, I got this exam for free when they first announced it on LinkedIn, because I hold CompTIA Security+. I never really appreciated having Security+ until I could use it to ask for free things 😄
+                            </p>
+                            <Fig src="image-1.png" alt="CYBRIXEN's LinkedIn post announcing CCCD, with free vouchers for the first 50 Security+ or TryHackMe SEC1 holders" />
+                            <p className="text-gray-700 leading-relaxed">
+                                I first heard about this platform from my friend <A href="https://www.linkedin.com/in/michal-soltysik-ssh-soc/"><B>Michał Sołtysik</B></A>, who also told me to take the certification. (Let me tell you, he has been watching their site and LinkedIn page ever since he heard about them, waiting for certifications with cool names to finally drop.)
+                            </p>
+                            <Fig src="image-2.png" alt="The CYBRIXEN certifications page listing CCCR, CCCD and CCSA" />
+                            <p className="text-gray-700 leading-relaxed">
+                                Let me bring up the cost and my feelings about this certification before we jump into the exam. CCCD costs 99 USD, way cheaper than their first blue team certification, CCSA. That makes me feel CYBRIXEN markets it as more entry level than CCSA, even though both are labelled Beginner.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                You might also notice something about CCCD in the image above: what the hell is a "3D security analyst shift", and what is a "hands-on 3D exam"? That is what makes this exam unique in the entire cybersecurity industry, so let's find out in the next section!
+                            </p>
+                        </Section>
+
+                        {/* ═══════════ 02. PRIOR TO THE EXAM ═══════════ */}
+                        <Section id="prior-to-the-exam" title="Prior to the Exam" icon="ListChecks">
+                            <Fig src="image-3.png" alt="CYBRIXEN's launch email for CCCD, showing the reception of the 3D office" />
+                            <p className="text-gray-700 leading-relaxed">
+                                I have to admit I only noticed this email from CYBRIXEN while writing this review, because it had landed in my Promotions tab. It explains what is special about their new certification: a fully 3D, gamified exam. From the image in it, it looks like we are a security analyst who has to walk through each area of an office to solve specific security problems.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                That sounds pretty unique compared with other certifications, right? Let's continue.
+                            </p>
+                            <Fig src="image-4.png" alt="The CCCD exam overview: 8 missions, 100 points, one 120-minute shift and a pass mark of 70" />
+                            <p className="text-gray-700 leading-relaxed">
+                                The <A href="https://cybrixen.com/certification/cccd">CCCD page</A> itself tells us that in that building we have to complete 8 missions within 120 minutes, scored out of 100, and 70 is the pass mark. These 8 missions are:
+                            </p>
+                            <ul className="list-disc list-outside ml-5 space-y-1 text-gray-700">
+                                <li>Phishing triage</li>
+                                <li>Access review</li>
+                                <li>Clean-desk walk</li>
+                                <li>Firewall hardening</li>
+                                <li>SIEM investigation</li>
+                                <li>Endpoint forensics</li>
+                                <li>Ransomware response</li>
+                            </ul>
+                            <p className="text-gray-700 leading-relaxed">
+                                And lastly, executive phishing. Given 2 hours to wander around the office, I would say it's pretty fair if you know what you are doing.
+                            </p>
+                            <Fig src="image-5.png" alt="The exam portal with the Cybrixen Solutions access badge: 120 minutes, 8 missions, pass mark 70/100" />
+                            <p className="text-gray-700 leading-relaxed">
+                                After you buy the exam voucher, 2 emails arrive in your inbox, and one of them has the credentials to sign in to the exam portal. Once signed in, it asks for the name to put on your certificate after you pass. Then you see the exam information along with your access badge to Cybrixen Solutions, where you will work your 120-minute shift.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                On this page you can read about all 8 missions in detail: how each one works (including the AI voice-over), its objective, what to deliver, how it is graded, and the layout of each mission area and the whole company. These matter if you want to take the exam. Spend your time here understanding how it works instead of going in blind and figuring things out during the exam. Remember, you only have 2 hours, so you had better spend that time completing all of the missions!
+                            </p>
+                            <Fig src="image-6.png" alt="Cybrixen Mail in the practice room, with a phishing email reported" />
+                            <Fig src="image-7.png" alt="The mission board in the practice room, where only the first mission is open" />
+                            <p className="text-gray-700 leading-relaxed">
+                                One nice thing CYBRIXEN has done for us is the practice room. You can start it before the exam to learn the layout, how to interact with each object and how the first mission works. All the other missions are locked, so you will have to figure those out in the exam.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                Now it's time for the exam itself. Let's go.
+                            </p>
+                        </Section>
+
+                        {/* ═══════════ 03. EXAM EXPERIENCE ═══════════ */}
+                        <Section id="exam-experience" title="Exam Experience" icon="ClipboardList">
+                            <Fig src="image-8.png" alt="The clock-in confirmation shown before the 120-minute shift starts" />
+                            <p className="text-gray-700 leading-relaxed">
+                                I originally wanted to take the exam on Sunday morning, but my friend Michał started his and passed on Saturday, the day the exam was released, so I started mine as well. When you click "Clock in", it reminds you again to check that your name is correct. Then it shows the basic controls, how to interact with objects and the mission board, plus a little box to tick confirming you have 120 free minutes and are ready to clock in.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                Once it started, I went to complete the first mission. Some emails are obvious, but a few are still tricky, and that includes the executive phishing (the last mission) as well.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                Then I went on to the second mission, the access review, where there is a policy for us and we have to adjust users' rights and access to match it. I thought I did a good job here, but I missed one policy because the search filter didn't show the group I was looking for. I could blame myself for not looking at each user carefully.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                After marking the 2nd mission done, I started my journey on the 3rd one, but after walking around for a while I realized that was not a good choice. So I went to firewall hardening (the 4th mission) while keeping an eye out for anything anomalous.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                For the 4th mission, there is a change ticket with requirements for changing the firewall rules, and you can use a packet tracer to confirm a rule was applied correctly before committing it and marking the mission done.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                Instead of going to the SIEM investigation (5th mission), I went to endpoint forensics (6th mission), because it was right next to the PC I used for firewall hardening. (Come to think of it, if I had walked into the company normally, I would have done the endpoint before the access review, but never mind.)
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                Endpoint forensics is not really digital forensics as we would think of it. It is light live forensics on a Linux server stuck at 100% CPU: remove whatever is causing it, verify downloads and fix file permissions. Simple as that.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                Now the complex part: ransomware response and executive phishing, which required me to look at the CEO's devices. You complete the last mission here and handle part of the 7th mission; the second half happens in the same room as the 5th mission that I skipped earlier.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                After triaging and responding properly in the incident response console, I marked the 7th mission done and completed the 5th next. It was pretty simple, but I got one thing wrong, because of a format issue I think? That left the last one, the 3rd mission, which requires us to look over the whole "floor". The mission board kept telling me how many things there were to discover, so I wandered around the floor again until I noticed the coffee machine. It was there, and I could make some coffee! I somehow made 2 and drank them. I didn't feel any different, but I found the rest of the problems after drinking those 2 cups of virtual coffee, so I guess it had something to do with it XD
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                I didn't double-check every mission despite having 43 minutes left. Maybe I was too lazy as usual; this habit dies hard, and humans are supposed to be lazy after a working week. ¯\_(ツ)_/¯
+                            </p>
+                            <Fig src="image-9.png" alt="The result screen: passed with 95 out of 100" />
+                            <Fig src="image-10.png" alt="The results page with feedback on each mission" />
+                            <p className="text-gray-700 leading-relaxed">
+                                I clocked out, and boom. Unlike my experience with CCSA, where I had to wait for the team to review it, this result was almost instant (around 1 to 2 minutes of automatic checking). I passed with 95/100, and on this page I can see what earned my score and what I missed.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                I would say the exam is pretty fun, which is why this blog feels different in the experience part. Compare that with a GIAC exam, where failing means losing 999 USD (before tax) for nothing. This one is really gamified, and free (in my case).
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                So what is my final thought? Read the next section 😄
+                            </p>
+                        </Section>
+
+                        {/* ═══════════ 04. REVIEW SUMMARY ═══════════ */}
+                        <Section id="review-summary" title="Review Summary" icon="Star">
+                            <p className="text-gray-700 leading-relaxed">
+                                CCCD is a fun exam that lets you walk the whole floor of a simulated company and handle 8 different missions. Those missions draw on many areas of cybersecurity: spotting what looks malicious in an event log and what looks phishy in an inbox, plus physical security and a bit of GRC. The GRC side is not full compliance work; it is change management, ticket handling and following policy.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                It shows that if you give AI to someone who has an idea and is willing to spend tokens and effort on it, the result can be unique, just like what CYBRIXEN did with all of their exams. If you want something fun, consider taking this exam. I also think CYBRIXEN could build more scenarios with different floors and places, and even market it as a game!
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                Also, I'm not a fan of the brown colour they put on the CCCD badge, so I hope they change it.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                                On the job-hunting side, will this certificate do anything for HR? Still no. I don't think the current market needs more certifications. It needs people who can use AI to do their jobs better than everyone else (like a 10x engineer, but a 100x SOC analyst or DFIR analyst), or seasoned professionals who aren't replaceable, like folks who have actually been through trials and know how to handle them properly, and no certificate can prove that. So take this certification for fun, but don't expect too much from it for promotions and job opportunities.
+                            </p>
+                        </Section>
+
+                        {/* Footer */}
+                        <div className="soc-ft">
+                            <a href="/reviews/index.html" style={{color:'var(--soc-ink4)',textDecoration:'none'}}>← ALL REVIEWS</a>
+                            <span style={{margin:'0 12px'}}>|</span>
+                            <a href="#" style={{color:'var(--soc-ink4)',textDecoration:'none'}}>↑ BACK TO TOP</a>
+                        </div>
+
+                    </main>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
